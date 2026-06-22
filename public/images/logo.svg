@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Foundation Architects &amp; Interior">
+    <defs>
+        <clipPath id="fa-disc"><circle cx="120" cy="120" r="119"/></clipPath>
+    </defs>
+
+    <!-- Royal-blue disc -->
+    <circle cx="120" cy="120" r="119" fill="#2D2D96"/>
+
+    <!-- Inscribed yellow frame, corners trimmed by the disc -->
+    <g clip-path="url(#fa-disc)">
+        <rect x="22" y="22" width="196" height="196" fill="none" stroke="#E9DF1F" stroke-width="2.4"/>
+    </g>
+
+    <!-- Architectural mirrored-F mark (outline only) -->
+    <path d="M95.6 46.9 H164.1 V198.8 H142.5 V144 H58.1 V121.9 H142.5 V69 H95.6 Z"
+          fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="miter"/>
+
+    <!-- Vertical wordmark -->
+    <text x="196" y="120" transform="rotate(-90 196 120)"
+          fill="#E9DF1F" text-anchor="middle"
+          font-family="Arial, Helvetica, sans-serif" font-size="15" letter-spacing="0.4">Foundation Architects</text>
+</svg>

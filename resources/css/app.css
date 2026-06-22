@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views';
+
+@theme {
+    --font-sans: 'Poppins', 'Hind Siliguri', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Playfair Display', 'Hind Siliguri', ui-serif, Georgia, serif;
+    --font-script: 'Great Vibes', cursive;
+
+    /* Brand palette — blue, matching the client's logo & the reference design */
+    --color-brand-50: #eff6ff;
+    --color-brand-100: #dbeafe;
+    --color-brand-200: #bfdbfe;
+    --color-brand-300: #93c5fd;
+    --color-brand-400: #60a5fa;
+    --color-brand-500: #3b82f6;
+    --color-brand-600: #2563eb;
+    --color-brand-700: #1d4ed8;
+    --color-brand-800: #1e40af;
+    --color-brand-900: #1e3a8a;
+}
+
+/* ---------- Site header (transparent over hero, solid on scroll) ---------- */
+#site-header {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+#site-header.is-scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+/* Nav links — white over the hero, dark once the header turns solid */
+.nav-link {
+    color: rgba(255, 255, 255, 0.92);
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+}
+
+#site-header.is-scrolled .nav-link {
+    color: #374151;
+}
+
+#site-header.is-scrolled .nav-link:hover {
+    color: var(--color-brand-600);
+}
+
+/* Logo text colour swap on scroll */
+.brand-name {
+    color: #ffffff;
+}
+
+.brand-sub {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#site-header.is-scrolled .brand-name {
+    color: #111827;
+}
+
+#site-header.is-scrolled .brand-sub {
+    color: var(--color-brand-600);
+}
+
+/* ---------- Hero text: soft black shadow for readability on any background ---------- */
+.hero-text-shadow {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65), 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- Testimonials auto-scrolling carousel (marquee) ---------- */
+@keyframes testimonial-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.testimonial-track {
+    width: max-content;
+    animation: testimonial-marquee 45s linear infinite;
+}
+
+/* Pause when the user hovers, so they can read */
+.testimonial-marquee:hover .testimonial-track {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .testimonial-track {
+        animation: none;
+    }
+}
