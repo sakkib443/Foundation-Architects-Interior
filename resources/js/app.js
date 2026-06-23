@@ -1,3 +1,28 @@
+// ---------- Preloader: reveal once the DOM is ready (min display + safety fallback) ----------
+(function preloader() {
+    const startedAt = performance.now();
+    const MIN_SHOW_MS = 650; // keep the intro visible briefly for a smooth feel
+    const MAX_WAIT_MS = 3000; // hard safety cap so it can never get stuck
+    let revealed = false;
+
+    const reveal = () => {
+        if (revealed) return;
+        revealed = true;
+        const wait = Math.max(0, MIN_SHOW_MS - (performance.now() - startedAt));
+        setTimeout(() => document.body.classList.add('preloaded'), wait);
+    };
+
+    // app.js is a deferred module, so it runs after the DOM is parsed.
+    // Reveal as soon as the document is interactive — never wait for every image.
+    if (document.readyState !== 'loading') {
+        reveal();
+    } else {
+        document.addEventListener('DOMContentLoaded', reveal, { once: true });
+    }
+
+    setTimeout(reveal, MAX_WAIT_MS);
+})();
+
 // ---------- Header: transparent over hero, solid on scroll ----------
 const header = document.getElementById('site-header');
 if (header) {

@@ -1,35 +1,12 @@
 @php
-    $milestones = [
-        [
-            'year'  => '2016',
-            'title' => 'The Foundation',
-            'desc'  => 'Founded in Dhaka with a clear purpose — to deliver honest, modern interior design and bring premium quality within reach for Bangladeshi homes.',
-        ],
-        [
-            'year'  => '2018',
-            'title' => 'Portfolio Expansion',
-            'desc'  => 'Grew beyond homes into commercial and corporate spaces — cafés, offices, and retail — successfully delivering on time and on budget.',
-        ],
-        [
-            'year'  => '2020',
-            'title' => '3D Visualization & R&D',
-            'desc'  => 'Adopted advanced 3D visualization and a dedicated R&D approach, letting clients walk through their space before a single brick is laid.',
-        ],
-        [
-            'year'  => '2022',
-            'title' => 'Organizational Growth',
-            'desc'  => 'Structured in-house teams for architecture, interior, 3D, and project operations — scaling delivery without ever compromising on quality.',
-        ],
-        [
-            'year'  => '2024',
-            'title' => '500+ Clients Milestone',
-            'desc'  => 'Celebrated serving over 500 satisfied clients, driven by transparent pricing and a genuinely friendly, design-first experience.',
-        ],
-        [
-            'year'  => '2026',
-            'title' => 'Looking Forward',
-            'desc'  => 'Today we keep pushing the craft — sustainable materials, smarter spaces, and a vision to become the most trusted interior brand in the country.',
-        ],
+    $milestones = $settings->get('about.timeline', []);
+    $milestones = (is_array($milestones) && ! empty($milestones)) ? $milestones : [
+        ['year' => '2016', 'title' => 'The Foundation', 'description' => 'Founded in Dhaka with a clear purpose — to deliver honest, modern interior design and bring premium quality within reach for Bangladeshi homes.'],
+        ['year' => '2018', 'title' => 'Portfolio Expansion', 'description' => 'Grew beyond homes into commercial and corporate spaces — cafés, offices, and retail — successfully delivering on time and on budget.'],
+        ['year' => '2020', 'title' => '3D Visualization & R&D', 'description' => 'Adopted advanced 3D visualization and a dedicated R&D approach, letting clients walk through their space before a single brick is laid.'],
+        ['year' => '2022', 'title' => 'Organizational Growth', 'description' => 'Structured in-house teams for architecture, interior, 3D, and project operations — scaling delivery without ever compromising on quality.'],
+        ['year' => '2024', 'title' => '500+ Clients Milestone', 'description' => 'Celebrated serving over 500 satisfied clients, driven by transparent pricing and a genuinely friendly, design-first experience.'],
+        ['year' => '2026', 'title' => 'Looking Forward', 'description' => 'Today we keep pushing the craft — sustainable materials, smarter spaces, and a vision to become the most trusted interior brand in the country.'],
     ];
 @endphp
 
@@ -64,10 +41,10 @@
                         <div class="ml-12 sm:ml-0 sm:w-1/2 sm:px-10 {{ $i % 2 === 0 ? 'sm:text-right' : 'sm:text-left' }}">
                             <div class="group rounded-2xl border border-brand-100 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-lg hover:shadow-brand-500/10 sm:p-6">
                                 <span class="inline-flex rounded-full bg-brand-50 px-3 py-1 font-display text-sm font-bold text-brand-700">
-                                    {{ $m['year'] }}
+                                    {{ $m['year'] ?? '' }}
                                 </span>
-                                <h3 class="mt-3 font-display text-lg font-semibold text-brand-900">{{ $m['title'] }}</h3>
-                                <p class="mt-2 text-sm leading-relaxed text-stone-500">{{ $m['desc'] }}</p>
+                                <h3 class="mt-3 font-display text-lg font-semibold text-brand-900">{{ $m['title'] ?? '' }}</h3>
+                                <p class="mt-2 text-sm leading-relaxed text-stone-500">{{ $m['description'] ?? '' }}</p>
                             </div>
                         </div>
 

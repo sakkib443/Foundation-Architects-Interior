@@ -1,15 +1,6 @@
 @php
     // Drop matching photos at public/images/team/<photo> to replace the initials avatars automatically.
-    $team = [
-        ['name' => 'Md. Rakibul Islam',   'role' => 'Sr. Architect',          'photo' => 'images/team/member-1.jpg'],
-        ['name' => 'Md. Tanjeel Hossain', 'role' => 'Civil Engineer',         'photo' => 'images/team/member-2.jpg'],
-        ['name' => 'Shahin Alam',         'role' => 'Lead 3D Visualizer',     'photo' => 'images/team/member-3.jpg'],
-        ['name' => 'Delwar Hossain',      'role' => 'Project Operations',     'photo' => 'images/team/member-4.jpg'],
-        ['name' => 'Mehjabin Sharia',     'role' => 'Interior Designer',      'photo' => 'images/team/member-5.jpg'],
-        ['name' => 'Shazadul Ferdoush',   'role' => '3D Visual Artist',       'photo' => 'images/team/member-6.jpg'],
-        ['name' => 'Sharmin Akter',       'role' => 'Interior Stylist',       'photo' => 'images/team/member-7.jpg'],
-        ['name' => 'Farhad Hossen',       'role' => 'Site Architect',         'photo' => 'images/team/member-8.jpg'],
-    ];
+    $team = \App\Models\TeamMember::where('is_published', true)->orderBy('sort_order')->get();
 
     $socials = [
         'M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z', // facebook
@@ -37,7 +28,7 @@
             @foreach ($team as $i => $member)
                 @php
                     $initials = collect(explode(' ', $member['name']))->filter(fn ($w) => ctype_alpha($w[0] ?? ''))->take(2)->map(fn ($w) => mb_substr($w, 0, 1))->implode('');
-                    $hasPhoto = file_exists(public_path($member['photo']));
+                    $hasPhoto = ! empty($member['photo']) && file_exists(public_path($member['photo']));
                 @endphp
                 <div class="group overflow-hidden rounded-2xl border border-stone-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10">
                     {{-- Avatar --}}

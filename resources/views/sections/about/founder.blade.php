@@ -1,19 +1,23 @@
 @php
-    // TODO: replace with the real founder's details & photo (drop a file at public/images/team/founder.jpg)
-    $founder = [
-        'name'   => 'Md. Ashraful Haque',
-        'title'  => 'Founder & Principal Architect',
-        'photo'  => 'images/team/founder.jpg',
-        'bio1'   => 'A visionary architect with a passion for honest, people-first design, our founder started Foundation Architects & Interior in 2016 to raise the standard of interior design in Bangladesh.',
-        'bio2'   => 'With a background in architecture and over a decade of hands-on experience, he leads the studio with a simple promise — every space we deliver should be beautiful, functional, and built with integrity.',
-        'quote'  => 'Great design isn\'t about luxury — it\'s about creating spaces where life feels effortless.',
-        'stats'  => [
+    $founder = $settings->get('about.founder', []);
+    $founder = is_array($founder) ? $founder : [];
+    $founder += [
+        'name'  => 'Md. Ashraful Haque',
+        'title' => 'Founder & Principal Architect',
+        'photo' => 'images/team/founder.jpg',
+        'bio1'  => 'A visionary architect with a passion for honest, people-first design, our founder started Foundation Architects & Interior in 2016 to raise the standard of interior design in Bangladesh.',
+        'bio2'  => 'With a background in architecture and over a decade of hands-on experience, he leads the studio with a simple promise — every space we deliver should be beautiful, functional, and built with integrity.',
+        'quote' => 'Great design isn\'t about luxury — it\'s about creating spaces where life feels effortless.',
+        'stats' => [
             ['v' => '10+', 'l' => 'Years Leading'],
             ['v' => '500+', 'l' => 'Projects Guided'],
             ['v' => 'B.Arch', 'l' => 'Qualified'],
         ],
     ];
-    $hasPhoto = file_exists(public_path($founder['photo']));
+    if (empty($founder['stats']) || ! is_array($founder['stats'])) {
+        $founder['stats'] = [];
+    }
+    $hasPhoto = ! empty($founder['photo']) && file_exists(public_path($founder['photo']));
     $initials = collect(explode(' ', $founder['name']))->filter(fn ($w) => ctype_alpha($w[0] ?? ''))->take(2)->map(fn ($w) => mb_substr($w, 0, 1))->implode('');
 @endphp
 

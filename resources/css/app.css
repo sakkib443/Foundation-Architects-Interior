@@ -74,6 +74,231 @@
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65), 0 2px 16px rgba(0, 0, 0, 0.5);
 }
 
+/* ---------- Preloader (blueprint-style brand intro) ---------- */
+#preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, #ffffff 0%, #eff6ff 55%, #dbeafe 100%);
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+body.preloaded #preloader {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preloader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.preloader-frame {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: grid;
+    place-items: center;
+}
+
+.preloader-square {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    border: 1.5px solid var(--color-brand-400);
+    will-change: transform;
+}
+
+.preloader-square--a {
+    animation: preloader-rotate 5s linear infinite;
+}
+
+.preloader-square--b {
+    animation: preloader-rotate 5s linear infinite reverse;
+    opacity: 0.45;
+    border-color: var(--color-brand-600);
+}
+
+@keyframes preloader-rotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.preloader-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px -4px rgba(59, 130, 246, 0.35);
+    animation: preloader-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes preloader-pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.06); }
+}
+
+.preloader-brand {
+    text-align: center;
+    line-height: 1;
+}
+
+.preloader-brand-script {
+    display: block;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: var(--color-brand-700);
+    line-height: 1;
+}
+
+.preloader-brand-sub {
+    display: block;
+    margin-top: 0.35rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-brand-500);
+}
+
+.preloader-bar {
+    width: 180px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(59, 130, 246, 0.14);
+    overflow: hidden;
+}
+
+.preloader-bar > span {
+    display: block;
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, var(--color-brand-500), transparent);
+    animation: preloader-bar 1.6s ease-in-out infinite;
+}
+
+@keyframes preloader-bar {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(350%); }
+}
+
+/* ---------- Home hero entrance animations ---------- */
+.hero-rise {
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: transform, opacity;
+}
+
+body.preloaded .hero-rise {
+    animation: hero-rise 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--rise-delay, 0s);
+}
+
+@keyframes hero-rise {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtle Ken Burns zoom on background slides */
+.hero-bg-zoom {
+    animation: hero-bg-zoom 16s ease-in-out infinite alternate;
+}
+
+@keyframes hero-bg-zoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #preloader,
+    .preloader-square,
+    .preloader-logo,
+    .preloader-bar > span,
+    .hero-rise,
+    body.preloaded .hero-rise,
+    .hero-bg-zoom {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ---------- CTA Shine button (Cost Calculator) ---------- */
+/* Unique style: continuous sheen sweep + pulsing glow halo + hover lift + icon tilt */
+.cta-shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transform: translateZ(0);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: cta-pulse 2.6s ease-in-out infinite;
+}
+
+.cta-shine::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        115deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.45) 50%,
+        transparent 70%
+    );
+    transform: translateX(-120%) skewX(-15deg);
+    animation: cta-sheen 3.8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cta-shine > * {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-shine:hover {
+    transform: translateY(-2px) scale(1.03);
+}
+
+.cta-shine .cta-icon {
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cta-shine:hover .cta-icon {
+    transform: rotate(-10deg) scale(1.12);
+}
+
+@keyframes cta-sheen {
+    0%   { transform: translateX(-120%) skewX(-15deg); }
+    55%  { transform: translateX(220%)  skewX(-15deg); }
+    100% { transform: translateX(220%)  skewX(-15deg); }
+}
+
+@keyframes cta-pulse {
+    0%, 100% {
+        box-shadow:
+            0 10px 25px -6px rgba(59, 130, 246, 0.5),
+            0 0 0 0 rgba(59, 130, 246, 0.55);
+    }
+    50% {
+        box-shadow:
+            0 14px 32px -6px rgba(59, 130, 246, 0.6),
+            0 0 0 10px rgba(59, 130, 246, 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cta-shine,
+    .cta-shine::before,
+    .cta-shine .cta-icon {
+        animation: none;
+        transition: none;
+    }
+}
+
 /* ---------- Testimonials auto-scrolling carousel (marquee) ---------- */
 @keyframes testimonial-marquee {
     from { transform: translateX(0); }

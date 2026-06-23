@@ -1,42 +1,42 @@
 @php
-    $steps = [
+    $steps = $settings->get('homepage.process', [
         [
-            'title' => 'Initial Consultation',
-            'time'  => '1–2 hours',
-            'desc'  => 'We listen to your needs, budget, and vision to set the right foundation.',
-            'icon'  => 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
+            'title'       => 'Initial Consultation',
+            'time'        => '1–2 hours',
+            'description' => 'We listen to your needs, budget, and vision to set the right foundation.',
+            'icon'        => 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
         ],
         [
-            'title' => 'Concept Development',
-            'time'  => '1–2 weeks',
-            'desc'  => 'Mood boards, themes, and concepts crafted around your personal style.',
-            'icon'  => 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+            'title'       => 'Concept Development',
+            'time'        => '1–2 weeks',
+            'description' => 'Mood boards, themes, and concepts crafted around your personal style.',
+            'icon'        => 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
         ],
         [
-            'title' => 'Space Planning',
-            'time'  => '2–3 weeks',
-            'desc'  => 'Smart, functional layouts that make the most of every corner.',
-            'icon'  => 'M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z',
+            'title'       => 'Space Planning',
+            'time'        => '2–3 weeks',
+            'description' => 'Smart, functional layouts that make the most of every corner.',
+            'icon'        => 'M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z',
         ],
         [
-            'title' => 'Design Development',
-            'time'  => '2–7 weeks',
-            'desc'  => 'Detailed 3D designs, materials, and finishes finalized to perfection.',
-            'icon'  => 'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z',
+            'title'       => 'Design Development',
+            'time'        => '2–7 weeks',
+            'description' => 'Detailed 3D designs, materials, and finishes finalized to perfection.',
+            'icon'        => 'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z',
         ],
         [
-            'title' => 'Implementation',
-            'time'  => '6–12 weeks',
-            'desc'  => 'Skilled execution and on-site management until everything is built.',
-            'icon'  => 'M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.348-.422.94-.502 1.396-.27M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63',
+            'title'       => 'Implementation',
+            'time'        => '6–12 weeks',
+            'description' => 'Skilled execution and on-site management until everything is built.',
+            'icon'        => 'M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.348-.422.94-.502 1.396-.27M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63',
         ],
         [
-            'title' => 'Final Handover',
-            'time'  => 'Project Complete',
-            'desc'  => 'A final walkthrough and the keys to your beautifully transformed space.',
-            'icon'  => 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+            'title'       => 'Final Handover',
+            'time'        => 'Project Complete',
+            'description' => 'A final walkthrough and the keys to your beautifully transformed space.',
+            'icon'        => 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
         ],
-    ];
+    ]);
 @endphp
 
 <section id="process" class="bg-brand-50 py-20 sm:py-28">
@@ -86,7 +86,7 @@
 
                         {{-- Description --}}
                         <p class="relative mt-2 text-sm leading-relaxed text-stone-500">
-                            {{ $step['desc'] }}
+                            {{ $step['description'] ?? '' }}
                         </p>
                     </div>
 
@@ -113,7 +113,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
             </a>
-            <a href="#services"
+            <a href="{{ route('services') }}"
                class="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand-700 ring-1 ring-brand-200 transition hover:bg-brand-50 hover:ring-brand-300">
                 Explore All Services
                 <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
