@@ -7,7 +7,7 @@
 
         {{-- Section header (centered) --}}
         <div class="mx-auto flex max-w-2xl flex-col items-center text-center">
-            <p class="font-script text-3xl leading-none text-brand-600 sm:text-4xl">Testimonials</p>
+            <p class="section-eyebrow text-brand-600">Testimonials</p>
             <h2 class="mt-3 font-display text-4xl font-bold tracking-tight text-brand-900 sm:text-5xl">
                 What Our Clients Say
             </h2>

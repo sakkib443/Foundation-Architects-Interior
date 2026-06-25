@@ -218,6 +218,59 @@ class SiteContentController extends Controller
             ->with('status', 'Footer & navigation saved.');
     }
 
+    /* ===================== PAGE BANNERS ===================== */
+
+    public function bannersEdit(): View
+    {
+        $heroes = app(Settings::class)->get('page_heroes', []);
+        $heroes = is_array($heroes) ? $heroes : [];
+
+        return view('admin.site-content.banners', compact('heroes'));
+    }
+
+    public function bannersUpdate(Request $request): RedirectResponse
+    {
+        $pages = ['about', 'services', 'projects', 'blog', 'testimonials', 'contact'];
+
+        $request->validate([
+            'heroes'             => ['nullable', 'array'],
+            'heroes.*.eyebrow'   => ['nullable', 'string', 'max:255'],
+            'heroes.*.title'     => ['nullable', 'string', 'max:255'],
+            'heroes.*.subtitle'  => ['nullable', 'string', 'max:500'],
+            'heroes.*.image'     => ['nullable', 'string', 'max:255'],
+            'image_about'        => ['nullable', 'image', 'max:4096'],
+            'image_services'     => ['nullable', 'image', 'max:4096'],
+            'image_projects'     => ['nullable', 'image', 'max:4096'],
+            'image_blog'         => ['nullable', 'image', 'max:4096'],
+            'image_testimonials' => ['nullable', 'image', 'max:4096'],
+            'image_contact'      => ['nullable', 'image', 'max:4096'],
+        ]);
+
+        $settings = app(Settings::class);
+        $current = $settings->get('page_heroes', []);
+        $current = is_array($current) ? $current : [];
+
+        $heroes = [];
+        foreach ($pages as $page) {
+            $row = (array) $request->input("heroes.$page", []);
+            $image = $row['image'] ?? ($current[$page]['image'] ?? null);
+            if ($request->hasFile("image_$page")) {
+                $image = $this->storeUpload($request, "image_$page", 'heroes');
+            }
+            $heroes[$page] = [
+                'image'    => $image,
+                'eyebrow'  => $row['eyebrow'] ?? '',
+                'title'    => $row['title'] ?? '',
+                'subtitle' => $row['subtitle'] ?? '',
+            ];
+        }
+
+        $settings->set('page_heroes', $heroes);
+
+        return redirect()->route('admin.site-content.banners.edit')
+            ->with('status', 'Page banners saved.');
+    }
+
     /* ===================== HELPERS ===================== */
 
     /**

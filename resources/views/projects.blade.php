@@ -6,13 +6,12 @@
 @section('content')
 
     {{-- ======================= PAGE HERO ======================= --}}
-    @include('partials.page-hero', [
+    @include('partials.page-hero', array_merge([
         'image'    => 'images/hero/slide-2.jpg',
         'eyebrow'  => 'Our Portfolio',
         'title'    => 'Projects',
         'subtitle' => 'A selection of residential and corporate spaces we have designed across Bangladesh.',
-        'crumb'    => 'Projects',
-    ])
+    ], $settings->get('page_heroes.projects', []), ['crumb' => 'Projects']))
 
     {{-- ======================= PROJECT CARDS ======================= --}}
     <section class="bg-brand-50 py-20 sm:py-28">

@@ -6,13 +6,12 @@
 @section('content')
 
     {{-- ======================= PAGE HERO ======================= --}}
-    @include('partials.page-hero', [
+    @include('partials.page-hero', array_merge([
         'image'    => 'images/hero/slide-1.jpg',
         'eyebrow'  => 'What We Do',
         'title'    => 'Our Services',
         'subtitle' => 'From a single room to a complete turnkey fit-out — explore how we can bring your space to life.',
-        'crumb'    => 'Services',
-    ])
+    ], $settings->get('page_heroes.services', []), ['crumb' => 'Services']))
 
     {{-- ======================= SERVICE CARDS ======================= --}}
     <section class="bg-brand-50 py-20 sm:py-28">

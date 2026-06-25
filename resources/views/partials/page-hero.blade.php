@@ -16,7 +16,7 @@
 
     {{-- Content --}}
     <div class="relative z-10 mx-auto w-full max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-        <p class="hero-rise hero-text-shadow font-script text-3xl leading-none text-brand-200 sm:text-4xl lg:text-5xl"
+        <p class="hero-rise hero-text-shadow section-eyebrow text-brand-200"
            style="--rise-delay: 0.1s">
             {{ $eyebrow }}
         </p>
