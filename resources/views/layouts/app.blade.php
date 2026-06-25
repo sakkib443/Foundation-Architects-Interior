@@ -14,15 +14,37 @@
     {{-- Elegant display & script fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hind+Siliguri:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    @php
+        // Admin-editable fonts: build a deduplicated Google Fonts request + var overrides.
+        $fonts = $settings->get('site.fonts', []);
+        $fDisplay = $fonts['display'] ?? 'Playfair Display';
+        $fScript  = $fonts['script'] ?? 'Poppins';
+        $fSans    = $fonts['sans'] ?? 'Poppins';
+
+        // Collapse duplicate families (e.g. when script === sans) — the CSS2 API
+        // returns 400 if the same family is listed twice. A weighted spec wins
+        // over a bare one for the same family.
+        $families = [];
+        foreach ([[$fSans, ':wght@400;500;600;700'], [$fDisplay, ':wght@400;500;600;700'], ['Hind Siliguri', ':wght@400;500;600;700'], [$fScript, '']] as [$fName, $fWeights]) {
+            $fName = trim($fName);
+            if ($fName === '') {
+                continue;
+            }
+            if (! array_key_exists($fName, $families) || ($fWeights !== '' && $families[$fName] === '')) {
+                $families[$fName] = $fWeights;
+            }
+        }
+        $fontHref = 'https://fonts.googleapis.com/css2?'
+            . implode('&', array_map(fn ($n) => 'family=' . str_replace(' ', '+', $n) . $families[$n], array_keys($families)))
+            . '&display=swap';
+        $brandColors = $settings->get('site.brand_colors', []);
+    @endphp
+    <link href="{{ $fontHref }}" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- Admin-editable brand colours (override Tailwind theme tokens at runtime) --}}
-    @php($brandColors = $settings->get('site.brand_colors', []))
-    @if (!empty($brandColors))
-        <style>:root{@foreach ($brandColors as $shade => $hex) --color-brand-{{ $shade }}:{{ $hex }};@endforeach}</style>
-    @endif
+    {{-- Admin-editable brand colours + fonts (override Tailwind theme tokens at runtime) --}}
+    <style>:root{@if (!empty($brandColors))@foreach ($brandColors as $shade => $hex) --color-brand-{{ $shade }}:{{ $hex }};@endforeach @endif --font-display:'{{ $fDisplay }}','Hind Siliguri',ui-serif,Georgia,serif;--font-script:'{{ $fScript }}','Hind Siliguri',ui-sans-serif,sans-serif;--font-sans:'{{ $fSans }}','Hind Siliguri',ui-sans-serif,system-ui,sans-serif;}</style>
     @stack('head')
 </head>
 <body class="min-h-screen bg-brand-50 font-sans text-stone-800 antialiased">
@@ -36,8 +58,8 @@
                 <img src="{{ asset('images/logo.svg') }}" alt="" class="preloader-logo">
             </div>
             <p class="preloader-brand">
-                <span class="preloader-brand-script">Foundation</span>
-                <span class="preloader-brand-sub">Architects &amp; Interior</span>
+                <span class="preloader-brand-script">{{ $settings->get('site.brand_line1', 'Foundation') }}</span>
+                <span class="preloader-brand-sub">{{ $settings->get('site.brand_line2', 'Architects & Interior') }}</span>
             </p>
             <div class="preloader-bar"><span></span></div>
         </div>
@@ -51,6 +73,8 @@
     </main>
 
     @include('partials.footer')
+
+    @include('partials.whatsapp-float')
 
     @stack('scripts')
 </body>

@@ -15,7 +15,9 @@ class CoreSettingsSeeder extends Seeder
     public function run(): void
     {
         $this->put('site', [
-            'name'    => config('app.name', 'Foundation Architects & Interior'),
+            'name'        => config('app.name', 'Foundation Architects & Interior'),
+            'brand_line1' => 'Foundation',
+            'brand_line2' => 'Architects & Interior',
             'logo'    => 'images/logo.svg',
             'favicon' => 'images/logo.svg',
             'seo'     => [
@@ -35,7 +37,7 @@ class CoreSettingsSeeder extends Seeder
             ],
             'fonts' => [
                 'display' => 'Playfair Display',
-                'script'  => 'Great Vibes',
+                'script'  => 'Poppins',
                 'sans'    => 'Poppins',
             ],
             'social' => [

@@ -26,6 +26,8 @@ class SettingController extends Controller
     {
         $validated = $request->validate([
             'name'             => ['required', 'string', 'max:255'],
+            'brand_line1'      => ['nullable', 'string', 'max:120'],
+            'brand_line2'      => ['nullable', 'string', 'max:120'],
             'seo_description'  => ['nullable', 'string'],
             'brand_colors'     => ['nullable', 'array'],
             'brand_colors.*'   => ['nullable', 'string', 'max:32'],
@@ -49,6 +51,8 @@ class SettingController extends Controller
         }
 
         $site['name'] = $validated['name'];
+        $site['brand_line1'] = $validated['brand_line1'] ?? null;
+        $site['brand_line2'] = $validated['brand_line2'] ?? null;
 
         // Nested SEO description (stored under seo.description).
         Arr::set($site, 'seo.description', $validated['seo_description'] ?? null);

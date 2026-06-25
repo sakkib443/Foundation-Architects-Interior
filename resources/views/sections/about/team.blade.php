@@ -14,7 +14,7 @@
 
         {{-- Header --}}
         <div class="mx-auto flex max-w-2xl flex-col items-center text-center">
-            <p class="font-script text-3xl leading-none text-brand-600 sm:text-4xl">The People</p>
+            <p class="section-eyebrow text-brand-600">The People</p>
             <h2 class="mt-3 font-display text-4xl font-bold tracking-tight text-brand-900 sm:text-5xl">
                 Meet the Team
             </h2>

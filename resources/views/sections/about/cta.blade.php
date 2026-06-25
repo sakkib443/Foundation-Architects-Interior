@@ -25,7 +25,7 @@
             <div class="pointer-events-none absolute -bottom-20 -right-10 h-72 w-72 rounded-full bg-brand-400/20 blur-3xl"></div>
 
             <div class="relative mx-auto max-w-2xl">
-                <p class="font-script text-3xl leading-none text-brand-200 sm:text-4xl">{{ $ctaTagline }}</p>
+                <p class="section-eyebrow text-brand-200">{{ $ctaTagline }}</p>
                 <h2 class="mt-3 font-display text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
                     {{ $ctaHeadline }}
                 </h2>

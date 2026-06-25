@@ -6,13 +6,12 @@
 @section('content')
 
     {{-- ======================= PAGE HERO ======================= --}}
-    @include('partials.page-hero', [
+    @include('partials.page-hero', array_merge([
         'image'    => 'images/hero/slide-1.jpg',
         'eyebrow'  => 'Testimonials',
         'title'    => 'What Our Clients Say',
         'subtitle' => "Real words from homeowners and businesses we've designed for across Bangladesh.",
-        'crumb'    => 'Testimonials',
-    ])
+    ], $settings->get('page_heroes.testimonials', []), ['crumb' => 'Testimonials']))
 
     {{-- ======================= TESTIMONIAL CARDS ======================= --}}
     <section class="bg-brand-50 py-20 sm:py-28">

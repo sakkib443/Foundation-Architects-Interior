@@ -20,8 +20,8 @@
         ],
         [
             'label' => 'WhatsApp',
-            'value' => '+880 1722-752657',
-            'href'  => 'https://wa.me/8801722752657',
+            'value' => $settings->get('site.contact.whatsapp_display') ?: $settings->get('site.contact.whatsapp', '+880 1722-752657'),
+            'href'  => 'https://wa.me/' . preg_replace('/\D+/', '', (string) $settings->get('site.contact.whatsapp', '8801722752657')),
             'icon'  => 'M20.52 3.48A11.93 11.93 0 0012 0C5.37 0 0 5.37 0 12c0 2.12.55 4.16 1.6 5.97L0 24l6.18-1.62A11.94 11.94 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 22a9.94 9.94 0 01-5.07-1.39l-.36-.21-3.67.96.98-3.58-.23-.37A9.95 9.95 0 1122 12c0 5.52-4.48 10-10 10z',
         ],
         [
@@ -52,13 +52,12 @@
 @section('content')
 
     {{-- ======================= PAGE HERO ======================= --}}
-    @include('partials.page-hero', [
+    @include('partials.page-hero', array_merge([
         'image'    => 'images/hero/slide-2.jpg',
         'eyebrow'  => 'Say Hello',
         'title'    => "Let's Design Your Space",
         'subtitle' => "Have a project in mind or just a question? We'd love to hear from you. Reach out below and our team will get back within one working day.",
-        'crumb'    => 'Contact',
-    ])
+    ], $settings->get('page_heroes.contact', []), ['crumb' => 'Contact']))
 
     {{-- ======================= CONTACT INFO + FORM ======================= --}}
     <section class="bg-brand-50 py-20 sm:py-28">
@@ -66,7 +65,7 @@
 
             {{-- Left: contact info cards --}}
             <div class="lg:col-span-2">
-                <p class="font-script text-3xl leading-none text-brand-600 sm:text-4xl">Get in touch</p>
+                <p class="section-eyebrow text-brand-600">Get in touch</p>
                 <h2 class="mt-2 font-display text-3xl font-bold tracking-tight text-brand-900 sm:text-4xl">
                     Talk to our team
                 </h2>

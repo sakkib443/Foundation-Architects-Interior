@@ -32,6 +32,11 @@
                 />
 
                 <div class="grid gap-5 sm:grid-cols-2">
+                    <x-form.input name="brand_line1" label="Header wordmark — line 1" :value="$site['brand_line1'] ?? ''" hint="Script word beside the logo, e.g. Foundation" />
+                    <x-form.input name="brand_line2" label="Header wordmark — line 2" :value="$site['brand_line2'] ?? ''" hint="Small-caps line, e.g. Architects & Interior" />
+                </div>
+
+                <div class="grid gap-5 sm:grid-cols-2">
                     <x-form.file
                         name="logo"
                         label="Logo"
@@ -93,7 +98,7 @@
         {{-- 3. Fonts --}}
         <section class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
             <h2 class="font-display text-lg font-bold text-brand-900">Fonts</h2>
-            <p class="mt-1 text-sm text-stone-500">Advanced &mdash; font family names used by the site theme.</p>
+            <p class="mt-1 text-sm text-stone-500">Enter any <a href="https://fonts.google.com" target="_blank" class="font-medium text-brand-600 hover:text-brand-800">Google Fonts</a> family name (e.g. Poppins, Inter, Lora). They load automatically. Leave blank for the default.</p>
 
             <div class="mt-5 grid gap-5 sm:grid-cols-3">
                 @php

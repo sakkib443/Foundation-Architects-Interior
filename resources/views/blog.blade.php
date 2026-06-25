@@ -6,13 +6,12 @@
 @section('content')
 
     {{-- ======================= PAGE HERO ======================= --}}
-    @include('partials.page-hero', [
+    @include('partials.page-hero', array_merge([
         'image'    => 'images/hero/slide-3.jpg',
         'eyebrow'  => 'From Our Blog',
         'title'    => 'Insights & Inspiration',
         'subtitle' => 'Tips, trends, and ideas from our interior design experts to inspire your next project.',
-        'crumb'    => 'Blog',
-    ])
+    ], $settings->get('page_heroes.blog', []), ['crumb' => 'Blog']))
 
     {{-- ======================= BLOG CARDS ======================= --}}
     <section class="bg-brand-50 py-20 sm:py-28">

@@ -15,7 +15,7 @@
 
         {{-- Header --}}
         <div class="mx-auto flex max-w-2xl flex-col items-center text-center">
-            <p class="font-script text-3xl leading-none text-brand-600 sm:text-4xl">Our Journey</p>
+            <p class="section-eyebrow text-brand-600">Our Journey</p>
             <h2 class="mt-3 font-display text-4xl font-bold tracking-tight text-brand-900 sm:text-5xl">
                 A Decade of Growth
             </h2>

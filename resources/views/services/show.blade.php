@@ -28,7 +28,7 @@
 
             {{-- Intro --}}
             <div class="mt-8 max-w-3xl">
-                <p class="font-script text-3xl leading-none text-brand-600 sm:text-4xl">{{ $service['tagline'] }}</p>
+                <p class="section-eyebrow text-brand-600">{{ $service['tagline'] }}</p>
                 <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand-900 sm:text-4xl">
                     {{ $service['title'] }}
                 </h2>
@@ -65,13 +65,19 @@
                 <p class="max-w-xl text-brand-100">
                     Tell us about your space and we'll get back within one working day with the next steps.
                 </p>
-                <a href="{{ route('contact') }}"
-                   class="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand-700 shadow-lg transition hover:bg-brand-50">
-                    Get a free consultation
-                    <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                    </svg>
-                </a>
+                <div class="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+                    <a href="{{ route('contact') }}"
+                       class="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand-700 shadow-lg transition hover:bg-brand-50">
+                        Get a free consultation
+                        <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                    <x-whatsapp-button
+                        :message="'Hello! I would like to know more about your ' . $service['title'] . ' service.'"
+                        label="Chat on WhatsApp"
+                        class="px-7 py-3.5 shadow-lg" />
+                </div>
             </div>
         </div>
     </section>

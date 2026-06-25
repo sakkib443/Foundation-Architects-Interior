@@ -7,7 +7,6 @@
         ['label' => 'Blog', 'href' => route('blog')],
         ['label' => 'Contact', 'href' => route('contact')],
     ];
-    $services = \App\Models\Service::where('is_published', true)->orderBy('sort_order')->get();
     $navCta = $settings->get('nav.cta', ['label' => 'Cost Calculator', 'href' => '#cost-calculator']);
 @endphp
 
@@ -20,8 +19,8 @@
                  width="48" height="48"
                  class="h-12 w-12 rounded-full shadow-lg ring-1 ring-white/20">
             <span class="leading-tight">
-                <span class="brand-name block font-script text-3xl leading-none">Foundation</span>
-                <span class="brand-sub block text-[10px] font-semibold uppercase tracking-[0.25em]">Architects &amp; Interior</span>
+                <span class="brand-name block font-script text-3xl leading-none">{{ $settings->get('site.brand_line1', 'Foundation') }}</span>
+                <span class="brand-sub block text-[10px] font-semibold uppercase tracking-[0.25em]">{{ $settings->get('site.brand_line2', 'Architects & Interior') }}</span>
             </span>
         </a>
 
@@ -29,20 +28,8 @@
         <nav class="hidden items-center gap-6 xl:flex">
             @foreach ($navLinks as $i => $link)
                 @if ($i === 1)
-                    {{-- Services dropdown after "About Us" --}}
-                    <div class="group relative">
-                        <a href="{{ route('services') }}" class="nav-link flex items-center gap-1 font-display text-[15px] font-medium tracking-wide">
-                            Services
-                            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </a>
-                        <div class="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 translate-y-2 rounded-xl border border-stone-100 bg-white p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                            @foreach ($services as $service)
-                                <a href="{{ route('services.show', $service->slug) }}" class="block rounded-lg px-4 py-2 font-display text-sm text-stone-600 transition hover:bg-brand-50 hover:text-brand-700">{{ $service->title }}</a>
-                            @endforeach
-                        </div>
-                    </div>
+                    {{-- Services (plain link, no dropdown) --}}
+                    <a href="{{ route('services') }}" class="nav-link font-display text-[15px] font-medium tracking-wide">Services</a>
                 @endif
                 <a href="{{ $link['href'] }}" class="nav-link font-display text-[15px] font-medium tracking-wide">{{ $link['label'] }}</a>
             @endforeach

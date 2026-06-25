@@ -34,7 +34,7 @@
         <div class="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center sm:px-6">
 
             {{-- Cursive tagline --}}
-            <p class="hero-rise hero-text-shadow font-script text-4xl leading-none text-white sm:text-5xl lg:text-6xl"
+            <p class="hero-rise hero-text-shadow font-script text-base font-medium leading-snug text-white sm:text-lg lg:text-xl"
                style="--rise-delay: 0.15s">
                 {{ $settings->get('homepage.hero.tagline', 'Foundation Architects & Interior, Design for Life.') }}
             </p>

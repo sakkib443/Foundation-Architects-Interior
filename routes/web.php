@@ -102,6 +102,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('site-content/contact', [SiteContentController::class, 'contactUpdate'])->name('site-content.contact.update');
     Route::get('site-content/footer', [SiteContentController::class, 'footerEdit'])->name('site-content.footer.edit');
     Route::put('site-content/footer', [SiteContentController::class, 'footerUpdate'])->name('site-content.footer.update');
+    Route::get('site-content/banners', [SiteContentController::class, 'bannersEdit'])->name('site-content.banners.edit');
+    Route::put('site-content/banners', [SiteContentController::class, 'bannersUpdate'])->name('site-content.banners.update');
 
     // Global settings (site identity, branding, contact)
     Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit');

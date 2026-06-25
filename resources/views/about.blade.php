@@ -6,13 +6,12 @@
 @section('content')
 
     {{-- ======================= PAGE HERO ======================= --}}
-    @include('partials.page-hero', [
+    @include('partials.page-hero', array_merge([
         'image'    => 'images/hero/slide-2.jpg',
         'eyebrow'  => 'Get to Know Us',
         'title'    => 'About Foundation Architects & Interior',
         'subtitle' => 'Where vision meets craftsmanship — a studio built on faith, honesty, and a passion for designing spaces that feel like home.',
-        'crumb'    => 'About Us',
-    ])
+    ], $settings->get('page_heroes.about', []), ['crumb' => 'About Us']))
 
     {{-- ======================= SECTIONS ======================= --}}
     @include('sections.about.story')
